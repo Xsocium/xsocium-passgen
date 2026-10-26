@@ -45,3 +45,5 @@ The locally bundled QR generator is based on Kazuhiko Arase's MIT-licensed QRCod
 ## Live application
 
 https://xsocium-passgen.pages.dev
+
+Deployment source: the `main` branch of this GitHub repository.
