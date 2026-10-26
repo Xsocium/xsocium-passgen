@@ -44,6 +44,6 @@ The locally bundled QR generator is based on Kazuhiko Arase's MIT-licensed QRCod
 
 ## Live application
 
-https://xsocium-passgen.pages.dev
+https://xpassgen.pages.dev
 
-Deployment source: the `main` branch of this GitHub repository.
+Deployment source: the `main` branch of this GitHub repository. The older Pages project remains available during the migration.
