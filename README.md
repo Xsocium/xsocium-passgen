@@ -41,3 +41,7 @@ Palette: deliberately conservative navy/teal. Exact reference palette values wer
 
 ## Third-party license
 The locally bundled QR generator is based on Kazuhiko Arase's MIT-licensed QRCode for JavaScript, via `qrcode-terminal`. Its license and attributions are preserved in `vendor/QR-LICENSE.txt`.
+
+## Live application
+
+https://xsocium-passgen.pages.dev
