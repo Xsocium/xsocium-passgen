@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#132b36">
+  <meta name="description" content="Ein sicherer Passwort-Generator mit QR-Code. Kostenlos, ohne Konto und vollständig im Browser. Powered by Xsocium.">
+  <title>Passwort Generator & QR Utility · Xsocium</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="vendor/qrcode.js"></script>
+  <script defer src="js/password.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header" aria-label="Website">
+      <a class="identity" href="./" aria-label="Xsocium Passwortgenerator Startseite">
+        <span class="identity-mark" aria-hidden="true"><svg viewBox="0 0 36 36" fill="none"><path d="M7 8L29 28M29 8L7 28" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><circle cx="18" cy="18" r="14.5" stroke="currentColor" stroke-width="1" opacity=".55"/></svg></span>
+        <span class="identity-text">xsocium<span class="identity-suffix"> / tools</span></span>
+      </a>
+      <button type="button" id="language-toggle" class="lang-toggle" aria-label="Switch language to English">EN</button>
+    </header>
+
+    <main class="content">
+      <div class="intro">
+        <div class="eyebrow"><span class="tiny-dot" aria-hidden="true"></span><span data-i18n="eyebrow">DEIN PRIVATER WORKSPACE</span></div>
+        <h1 data-i18n="title">Passwort Generator<span class="accent"> & QR Utility</span></h1>
+        <p class="subtitle" data-i18n="subtitle">Sichere Passwörter in Sekunden. Alles passiert direkt in deinem Browser.</p>
+      </div>
+
+      <div class="workspace">
+        <section class="panel generator-panel" aria-labelledby="generator-heading">
+          <div class="panel-top"><div><p class="overline" data-i18n="stepOne">01 / GENERIEREN</p><h2 id="generator-heading" data-i18n="generatorHeading">Dein neues Passwort</h2></div><span class="mini-icon" aria-hidden="true">✳</span></div>
+          <label class="field-label" for="password-output" data-i18n="passwordLabel">Generiertes Passwort</label>
+          <div class="password-box">
+            <input id="password-output" type="password" value="" placeholder="••••••••••••••••" readonly spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="password-help">
+            <button id="visibility-btn" type="button" class="icon-btn" aria-label="Passwort anzeigen" title="Passwort anzeigen" disabled>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 12s3.7-6 10-6 10 6 10 6-3.7 6-10 6-10-6-10-6Z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/></svg>
+            </button>
+            <button id="copy-btn" type="button" class="icon-btn" aria-label="Passwort kopieren" title="Passwort kopieren" disabled>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8" y="8" width="11" height="12" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2" stroke="currentColor" stroke-width="1.7"/></svg>
+            </button>
+          </div>
+          <p id="password-help" class="helper" data-i18n="passwordHelp">Dein Passwort wird hier angezeigt und nirgends gespeichert.</p>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="field-label" for="strength" data-i18n="strengthLabel">Passwort-Stärke</label>
+              <select id="strength">
+                <option value="Strong" data-i18n="strong">Stark</option>
+                <option value="Medium" data-i18n="medium">Mittel</option>
+                <option value="Weak" data-i18n="weak">Einfach</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="field-label" for="length" data-i18n="lengthLabel">Zeichen-Länge</label>
+              <div class="length-control">
+                <button id="length-minus" class="length-btn" type="button" aria-label="Länge reduzieren">−</button>
+                <input id="length" type="number" min="6" max="64" step="1" value="16" inputmode="numeric">
+                <button id="length-plus" class="length-btn" type="button" aria-label="Länge erhöhen">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="range-row"><span>6</span><input id="length-range" type="range" min="6" max="64" step="1" value="16" aria-label="Zeichen-Länge wählen"><span>64</span></div>
+          <div class="actions"><button id="generate-btn" class="primary-btn" type="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.65 5.65l2.12 2.12m8.46 8.46 2.12 2.12m0-12.7-2.12 2.12m-8.46 8.46-2.12 2.12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/></svg><span data-i18n="generate">Passwort generieren</span></button><button id="clear-btn" class="secondary-btn" type="button" data-i18n="clear">Löschen</button></div>
+        </section>
+
+        <section class="panel qr-panel" aria-labelledby="qr-heading">
+          <div class="panel-top"><div><p class="overline" data-i18n="stepTwo">02 / OPTIONAL TEILEN</p><h2 id="qr-heading" data-i18n="qrHeading">QR-Code</h2></div><span class="mini-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h3v3h-3zM19 14h2v2h-2zM14 19h2v2h-2zM19 19h2v2h-2z" stroke="currentColor" stroke-width="1.2"/></svg></span></div>
+          <div class="qr-canvas-container" id="qr-area"><div class="qr-empty" id="qr-empty"><div class="empty-illustration" aria-hidden="true"><svg viewBox="0 0 80 80" fill="none"><rect x="11" y="11" width="23" height="23" rx="2" stroke="currentColor" stroke-width="2.7"/><rect x="18" y="18" width="9" height="9" fill="currentColor"/><rect x="46" y="11" width="23" height="23" rx="2" stroke="currentColor" stroke-width="2.7"/><rect x="53" y="18" width="9" height="9" fill="currentColor"/><rect x="11" y="46" width="23" height="23" rx="2" stroke="currentColor" stroke-width="2.7"/><rect x="18" y="53" width="9" height="9" fill="currentColor"/><path d="M46 46h8v8h-8zm15 0h8v8h-8zM46 61h8v8h-8zM61 61h8v8h-8z" fill="currentColor" opacity=".55"/></svg></div><span data-i18n="qrPlaceholder">Noch kein QR-Code</span></div><canvas id="qr-canvas" width="512" height="512" hidden role="img" aria-label="QR-Code mit generiertem Passwort"></canvas></div>
+          <p class="qr-note" data-i18n="qrNote">Ein QR-Code enthält dein Passwort im Klartext. Nur anzeigen, wenn du ihn wirklich brauchst.</p>
+          <button id="qr-toggle" type="button" class="outline-btn" disabled><span data-i18n="showQr">QR-Code anzeigen</span></button>
+          <button id="download-btn" type="button" class="secondary-btn download-btn" disabled><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v3h16v-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="saveQr">QR-Code als PNG speichern</span></button>
+        </section>
+      </div>
+
+      <div class="trust-strip"><div class="trust-item"><span class="trust-icon" aria-hidden="true">◈</span><div><strong data-i18n="trustOneTitle">100 % lokal</strong><p data-i18n="trustOneText">Verarbeitung direkt im Browser</p></div></div><div class="trust-item"><span class="trust-icon" aria-hidden="true">◇</span><div><strong data-i18n="trustTwoTitle">Keine Speicherung</strong><p data-i18n="trustTwoText">Keine Accounts, keine Datenbank</p></div></div><div class="trust-item"><span class="trust-icon" aria-hidden="true">✦</span><div><strong data-i18n="trustThreeTitle">Kryptografisch sicher</strong><p data-i18n="trustThreeText">Web Crypto API statt Math.random()</p></div></div></div>
+      <p id="status" class="status-message" role="status" aria-live="polite"></p>
+    </main>
+    <footer class="site-footer"><span>© 2026 <strong>Xsocium</strong> · <span data-i18n="footer">Ein unabhängiges, privates Web-Tool</span></span><span class="footer-right"><span class="footer-dot"></span><span data-i18n="powered">Powered by Xsocium</span></span></footer>
+  </div>
+</body>
+</html>
